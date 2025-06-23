@@ -15,7 +15,7 @@ import { ShipmentTable } from '../cmps/ShipmentTable'
 export function CarIndex() {
 
     const [filterBy, setFilterBy] = useState(carService.getDefaultFilter())
-    const cars = useSelector(storeState => storeState.carModule.cars)
+    const shipments = useSelector(storeState => storeState.carModule.cars)
 
     useEffect(() => {
         loadCars(filterBy)
@@ -73,16 +73,16 @@ export function CarIndex() {
 
     return (
         <main className="car-index">
-            <header>
+            {/* <header>
                 <h2>Cars</h2>
                 {userService.getLoggedinUser() && <button onClick={onAddCar}>Add a Car</button>}
-            </header>
-            <CarFilter filterBy={filterBy} setFilterBy={setFilterBy} />
-            <ShipmentTable filterBy={filterBy} handleChange={handleChange} />
-            <CarList
+            </header> */}
+            {/* <CarFilter filterBy={filterBy} setFilterBy={setFilterBy} /> */}
+            <ShipmentTable filterBy={filterBy} handleChange={handleChange} shipments={shipments} />
+            {/* <CarList
                 cars={cars}
                 onRemoveCar={onRemoveCar}
-                onUpdateCar={onUpdateCar} />
+                onUpdateCar={onUpdateCar} /> */}
         </main>
     )
 }

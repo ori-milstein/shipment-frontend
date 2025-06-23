@@ -6,19 +6,16 @@ import { carService as local } from './car.service.local'
 import { carService as remote } from './car.service.remote'
 
 function getEmptyCar() {
-	return {
-		vendor: makeId(),
-		speed: getRandomIntInclusive(80, 240),
-		msgs: [],
-	}
+    return {
+        vendor: makeId(),
+        speed: getRandomIntInclusive(80, 240),
+        msgs: [],
+    }
 }
 
 function getDefaultFilter() {
     return {
-        txt: '',
-        minSpeed: '',
-        sortField: '',
-        sortDir: '',
+
     }
 }
 

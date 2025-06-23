@@ -8,8 +8,8 @@ export const carService = {
     addCarMsg
 }
 
-async function query(filterBy = { txt: '', price: 0 }) {
-    return httpService.get(`car`, filterBy)
+async function query(filterBy = {}) {
+    return httpService.get(`shipment`, filterBy)
 }
 
 function getById(carId) {
@@ -30,6 +30,6 @@ async function save(car) {
 }
 
 async function addCarMsg(carId, txt) {
-    const savedMsg = await httpService.post(`car/${carId}/msg`, {txt})
+    const savedMsg = await httpService.post(`car/${carId}/msg`, { txt })
     return savedMsg
 }
