@@ -48,13 +48,22 @@ export function ShipmentTable({ filterBy, handleChange, shipments }) {
             <tbody>
                 {shipments.map(shipment => (
                     <tr key={shipment._id}>
-                        <td>{shipment._id}</td>
+                        <td>{shipment._id.slice(shipment._id.length - 2)}</td>
                         <td>
-                            {shipment.original_eta}
+                            {`${shipment.original_eta.slice(8, 10)}/${shipment.original_eta.slice(5, 7)}/${shipment.original_eta.slice(0, 4)} ${shipment.original_eta.slice(-9, -4)}`}
                         </td>
                         <td></td>
-                        <td>{shipment.order_ready_to_ship}</td>
-                        <td>{shipment.shipment_on_its_way}</td>
+                        <td>
+                            {shipment.order_ready_to_ship ?
+                                `${shipment.order_ready_to_ship.slice(8, 10)}/${shipment.order_ready_to_ship.slice(5, 7)}/${shipment.order_ready_to_ship.slice(0, 4)} ${shipment.order_ready_to_ship.slice(-9, -4)}`
+                                : 'No'}
+
+                        </td>
+                        <td>
+                            {shipment.shipment_on_its_way ?
+                                `${shipment.shipment_on_its_way.slice(8, 10)}/${shipment.shipment_on_its_way.slice(5, 7)}/${shipment.shipment_on_its_way.slice(0, 4)} ${shipment.shipment_on_its_way.slice(-9, -4)}`
+                                : 'No'}
+                        </td>
 
                     </tr>))}
 
