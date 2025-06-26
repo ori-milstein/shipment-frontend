@@ -16,10 +16,22 @@ export function CarIndex() {
 
     const [filterBy, setFilterBy] = useState(carService.getDefaultFilter())
     const shipments = useSelector(storeState => storeState.carModule.cars)
-
+    // const statusesCalc = shipments.map(shipmet => {
+    //     carService.isShipmentAtRisk(shipmet) ? 'At Risk' : 'On Time'
+    // })
+    const [statuses, setStatuses] = useState([])
     useEffect(() => {
         loadCars(filterBy)
+
     }, [filterBy])
+
+    useEffect(() => {
+        setStatuses(shipments.map(shipment => {
+            return { id: shipment._id, stat: carService.isShipmentAtRisk(shipment) ? 'At Risk' : 'On Time' }
+
+        }))
+
+    }, [shipments])
 
     async function onRemoveCar(carId) {
         try {
@@ -78,7 +90,7 @@ export function CarIndex() {
                 {userService.getLoggedinUser() && <button onClick={onAddCar}>Add a Car</button>}
             </header> */}
             {/* <CarFilter filterBy={filterBy} setFilterBy={setFilterBy} /> */}
-            <ShipmentTable filterBy={filterBy} handleChange={handleChange} shipments={shipments} />
+            <ShipmentTable filterBy={filterBy} handleChange={handleChange} shipments={shipments} statuses={statuses} />
             {/* <CarList
                 cars={cars}
                 onRemoveCar={onRemoveCar}

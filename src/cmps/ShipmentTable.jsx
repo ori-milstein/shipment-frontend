@@ -1,4 +1,4 @@
-export function ShipmentTable({ filterBy, handleChange, shipments }) {
+export function ShipmentTable({ filterBy, handleChange, shipments, statuses }) {
     return (
         <table>
             <thead>
@@ -50,18 +50,19 @@ export function ShipmentTable({ filterBy, handleChange, shipments }) {
                     <tr key={shipment._id}>
                         <td>{shipment._id.slice(shipment._id.length - 2)}</td>
                         <td>
-                            {`${shipment.original_eta.slice(8, 10)}/${shipment.original_eta.slice(5, 7)}/${shipment.original_eta.slice(0, 4)} ${shipment.original_eta.slice(-9, -4)}`}
+                            {/* {`${shipment.original_eta.slice(8, 10)}/${shipment.original_eta.slice(5, 7)}/${shipment.original_eta.slice(0, 4)} ${shipment.original_eta.slice(-9, -4)}`} */}
+                            {`${new Date(shipment.original_eta).toLocaleString("en-IL")}`}
                         </td>
-                        <td></td>
+                        <td>{statuses.length && statuses.filter(status => status.id === shipment._id)[0].stat}</td>
                         <td>
                             {shipment.order_ready_to_ship ?
-                                `${shipment.order_ready_to_ship.slice(8, 10)}/${shipment.order_ready_to_ship.slice(5, 7)}/${shipment.order_ready_to_ship.slice(0, 4)} ${shipment.order_ready_to_ship.slice(-9, -4)}`
+                                `${new Date(shipment.order_ready_to_ship).toLocaleString("en-IL")}`
                                 : 'No'}
 
                         </td>
                         <td>
                             {shipment.shipment_on_its_way ?
-                                `${shipment.shipment_on_its_way.slice(8, 10)}/${shipment.shipment_on_its_way.slice(5, 7)}/${shipment.shipment_on_its_way.slice(0, 4)} ${shipment.shipment_on_its_way.slice(-9, -4)}`
+                                `${new Date(shipment.shipment_on_its_way).toLocaleString("en-IL")}`
                                 : 'No'}
                         </td>
 
